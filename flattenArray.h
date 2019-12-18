@@ -18,4 +18,8 @@ void masterControlLoop(string aString);
 
 string getArrayStringFromUser();
 
-bool validateArrayString(string arrayString);
+string getArrayStringInputRequestLoop(bool temp, string & arrayString);
+
+bool validateArrayString(string arrayString, string & errorMessage);
+
+bool processArrayString(string arrayString, string & errorMessage);

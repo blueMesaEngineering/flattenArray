@@ -56,13 +56,19 @@ string getArrayStringFromUser()
 {
     string arrayString = "";
 
-    cout << "Please enter your array: ";
+    cout << "Please enter your array of integers in the following format, \nusing the comma as a delimter and square brackets to indicate array closure. (e.g. [1,2,...,n]) \nYour Array: ";
     getline(cin, arrayString);
 
-    bool temp = validateArrayString(arrayString);
+    string errorMessage = "";
+    bool temp = validateArrayString(arrayString, errorMessage);
 
+    return getArrayStringInputRequestLoop(temp, arrayString);
+}
+
+string getArrayStringInputRequestLoop(bool temp, string & arrayString)
+{
     int i = 0;
-
+ 
     do 
     {
         if(temp == 1)
@@ -71,24 +77,32 @@ string getArrayStringFromUser()
         {
             cout << "Please enter a non-empty array: ";
             getline(cin, arrayString);
-            bool temp = validateArrayString(arrayString);
+            string errorMessage = "";
+            bool temp = validateArrayString(arrayString, errorMessage);
             i++;
-            if(i >= 4)
+            if((i >= 2) && arrayString == "")
                 break;
         }
-    } while(arrayString == "");
+    } while(temp != 1);
 
     return arrayString;
 }
 
-bool validateArrayString(string arrayString)
+bool validateArrayString(string arrayString, string & errorMessage)
 {
-    // bool temp = isStringEmpty(arrayString);
-
     if(arrayString.empty() == false) 
     {
+        bool validArray = processArrayString(arrayString, errorMessage);
+        
         cout << "The array is: " << arrayString << endl;
-        return 1;
+
+        if(validArray)
+            return 1;
+        else
+        {
+            cout << "This array is not valid. " << errorMessage;
+            return 0;
+        }
     }
     else if(arrayString.empty() == true) 
     {
@@ -102,4 +116,24 @@ bool validateArrayString(string arrayString)
     }
 
     return 0;
+}
+
+bool processArrayString(string arrayString, string & errorMessage)
+{
+    if(arrayString.find('[') == string::npos)
+    {
+        errorMessage = "No open bracket ([) present.\n";
+        return 0;
+    }
+    else if(arrayString.find(']') == string::npos)
+    {
+        errorMessage = "No closing bracket (]) present.\n";
+        return 0;
+    }
+    else
+    {
+        
+        return 1;
+    }
+    
 }
