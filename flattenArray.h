@@ -20,6 +20,8 @@ string getArrayStringFromUser();
 
 string getArrayStringInputRequestLoop(bool temp, string & arrayString);
 
-bool validateArrayString(string arrayString, string & errorMessage);
+bool validateArrayString(string & arrayString, string & errorMessage);
 
-bool processArrayString(string arrayString, string & errorMessage);
+bool processArrayString(string & arrayString, string & errorMessage);
+
+void flattenArray(string & arrayString);

@@ -88,7 +88,7 @@ string getArrayStringInputRequestLoop(bool temp, string & arrayString)
     return arrayString;
 }
 
-bool validateArrayString(string arrayString, string & errorMessage)
+bool validateArrayString(string & arrayString, string & errorMessage)
 {
     if(arrayString.empty() == false) 
     {
@@ -118,22 +118,28 @@ bool validateArrayString(string arrayString, string & errorMessage)
     return 0;
 }
 
-bool processArrayString(string arrayString, string & errorMessage)
+bool processArrayString(string & arrayString, string & errorMessage)
 {
-    if(arrayString.find('[') == string::npos)
+    if(arrayString[0] != '[')
     {
-        errorMessage = "No open bracket ([) present.\n";
+        errorMessage = "The first character is not an open bracket ([).\n";
         return 0;
     }
-    else if(arrayString.find(']') == string::npos)
+    else if(arrayString[arrayString.length() - 1] != ']')
     {
-        errorMessage = "No closing bracket (]) present.\n";
+        errorMessage = "The last character is not a closing bracket (]).\n";
         return 0;
     }
     else
     {
-        
+        errorMessage = "";
+        flattenArray(arrayString);
         return 1;
     }
+    
+}
+
+void flattenArray(string & arrayString)
+{
     
 }
