@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <algorithm>
 
 #include "flattenArray.h"
 
@@ -136,10 +137,10 @@ bool processArrayString(string & arrayString, string & errorMessage)
         flattenArray(arrayString);
         return 1;
     }
-    
 }
 
 void flattenArray(string & arrayString)
 {
-    
+    arrayString.erase(remove(arrayString.begin() + 1, arrayString.end(), '['), arrayString.end());
+    arrayString.erase(remove(arrayString.begin(), arrayString.end(), ']'), arrayString.end() - 1);
 }
